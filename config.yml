@@ -1,0 +1,35 @@
+# Configuration of for simulation
+
+sim_name: test-cz-induction_vacuum
+visualize: False
+
+# make changes to definitions in config_geo, config_mat, config_sim here!
+config_update:
+  materials:
+    tin-solid:
+      Emissivity: 0.1
+    tin-liquid:
+      Heat Conductivity: 62
+  simulation:
+    boundaries:
+      crystal:
+        htc: 0  # vacuum
+        # htc: 10  # air
+        # htc: 35  # fan
+      crucible_outside:
+        htc: 0  # vacuum
+        # htc: 10  # air
+        # htc: 16  # fan
+      melt:
+        htc: 0  # vacuum
+        # htc: 10  # air
+        # htc: 16  # fan
+  geometry:
+    filling:
+      material: vacuum
+
+# Uncomment this for parameter study
+# study_params:
+#   simulation:
+#     general:
+#       v_pull: [4, 8, 12, 16]

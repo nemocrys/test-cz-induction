@@ -1,0 +1,43 @@
+# Configuration for diameter iteration simulations
+
+sim_name: air_T=240_vpull=16
+T_tp: 505
+r_min: 0.0008
+r_max: 0.002
+dT_max: 0.1
+
+# make changes to definitions in config_geo, config_mat, config_sim here!
+config_update:
+  materials:
+    tin-solid:
+      Emissivity: 0.1
+    tin-liquid:
+      Heat Conductivity: 62
+  geometry: 
+    crystal:
+      r_top: 0.0025  # variable
+  simulation:
+    general:
+      v_pull: 16
+    smart-heater:
+      T: 513.15  # 240°C
+      control-point: True
+    boundaries:
+      crystal:
+        # htc: 0  # vacuum
+        htc: 10  # air
+        # htc: 35  # fan
+      crucible_outside:
+        # htc: 0  # vacuum
+        htc: 10  # air
+        # htc: 16  # fan
+      melt:
+        # htc: 0  # vacuum
+        htc: 10  # air
+        # htc: 16  # fan
+
+# Uncomment this for parameter study
+# study_params:
+#   simulation:
+#     general:
+#       v_pull: [4, 8, 12, 16]

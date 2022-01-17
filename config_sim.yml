@@ -1,0 +1,79 @@
+# base configuration for simulation
+# don't make any changes here but use config_update in config.yml / config_di.yml
+
+general:
+  heat_control: True
+  heat_convection: True
+  heating_induction: True
+  phase_change: True
+  transient: False  # will be set by Simulation object
+  v_pull: 4  # mm/min
+
+boundaries:
+  crucible_outside:
+    htc: 6.5 # according to MMS Study
+    T_ext: 293.15
+  crystal:
+    htc: 1  # according to estimation from IKZ Jahresbericht
+    T_ext: 293.15
+  melt:
+    htc: 6.5  # similar to crucible
+    T_ext: 293.15
+  inductor_inside:
+    T: 293.15
+  vessel_outside:
+    T: 293.15
+
+transient:
+  # smart_heater_t: 1  # optional, defaults to dt
+  # the following will be set by control in transient simulation
+  dt: 0.1
+  dt_out: 1
+  t_max: 100
+
+heating_induction:
+  frequency: 13.5e+3  # Hz
+  current: 100  # A
+
+heating_resistance:
+  power: 100
+
+smart-heater:
+  T: 505  # melting point tin
+  control-point: False  # if False: use T at melt-crystal interface (triple point)
+  x: 0.035
+  y: 0.005
+  z: 0.0
+
+solver-update:
+#   global:
+#     Steady State Max Iterations: 3
+  all-solvers:
+      Linear System Iterative Method: Idrs
+    # Steady State Convergence Tolerance: 1.e-6
+    # Nonlinear System Convergence Tolerance: 1.0e-4
+    # Linear System Convergence Tolerance: 1.e-9
+  # other options: solver-heat, solver-statmag, solver-phase-change
+
+probes:
+  crc-wall: [0.055, 0.02]  # Pt100, thermocouples
+  crc-wall+2: [0.055, 0.04]  # Wall top surface
+  crc-wall+1: [0.055, 0.03]
+  crc-wall-1: [0.055, 0.01]
+  crc-wall-2: [0.055, 0.00]
+  crc-wall-3: [0.055, -0.01]  # Wall bottom surface
+  crc-bt: [0.0, -0.01]
+  melt-side: [0.048, 0.002]  # Thermocouple through crucible into melt
+  melt-control: [0.035, 0.005]  # Temperature control Pt100 / thermocouple
+  # base setup: height of meniscus (y-coordinate): 0.03363932
+  p1_crys_in: [0, 0.05863932]  # base setup: center of crystal at l/4
+  p1_crys_sf: [0.004, 0.05863932]  # base setup: surface of crystal at l/4
+  p2_crys_in: [0, 0.08363932]  # base setup: center of crystal at l/2
+  p2_crys_sf: [0.004, 0.08363932]  # base setup: surface of crystal at l/2
+  p3_crys_in: [0, 0.10863932]  # base setup: center of crystal at 3l/4
+  p3_crys_sf: [0.004, 0.10863932]  # base setup: surface of crystal at 3l/4
+  p4_crys_tp: [0, 0.13363932]  # base setup: interface between seed & crystal
+  p5_seed: [0.0009, 0.14363932]  # base setup: center of seed at l/4
+  p6_seed: [0.0009, 0.15363932]  # base setup: center of seed at l/2
+  p7_seed: [0.0009, 0.16363932]  # base setup: center of seed at 3l/4
+  p8_seed: [0.0009, 0.17363932]  # base setup: center of seed at l
