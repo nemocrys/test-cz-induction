@@ -2,6 +2,13 @@
 
 Thermal simulation of Test-CZ Czochralski growth furnace with induction heating. A paper describing this model in detail has been submitted and is currently under review.
 
+The project is developed and maintained by the [**Model experiments group**](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description#c486) at the Leibniz Institute for Crystal Growth (IKZ).
+
+### Referencing
+If you use this code in your research, please cite our article (available with open access):
+
+> A. Enders-Seidlitz, J. Pal, and K. Dadzis, Development and validation of a thermal simulation for the Czochralski crystal growth process using model experiments *Journal of Crystal Growth*, In Press. https://doi.org/10.1088/1757-899X/1223/1/012003.
+
 ## Overview
 
 This project is used for 2D steady-state electromagnetism and heat transfer simulation of the NEMOCRYS Test-CZ Furnace.
