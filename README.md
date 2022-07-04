@@ -7,11 +7,14 @@ The project is developed and maintained by the [**Model experiments group**](htt
 ### Referencing
 If you use this code in your research, please cite our article (available with open access):
 
-> A. Enders-Seidlitz, J. Pal, and K. Dadzis, Development and validation of a thermal simulation for the Czochralski crystal growth process using model experiments *Journal of Crystal Growth*, In Press. [https://doi.org/10.1016/j.jcrysgro.2022.126750](https://doi.org/10.1016/j.jcrysgro.2022.126750).
+> A. Enders-Seidlitz, J. Pal, and K. Dadzis, Development and validation of a thermal simulation for the Czochralski crystal growth process using model experiments *Journal of Crystal Growth*,  593 (2022) 126750. [https://doi.org/10.1016/j.jcrysgro.2022.126750](https://doi.org/10.1016/j.jcrysgro.2022.126750).
 
 ## Overview
 
 This project is used for 2D steady-state electromagnetism and heat transfer simulation of the NEMOCRYS Test-CZ Furnace.
+
+<img src="https://ars.els-cdn.com/content/image/1-s2.0-S002202482200238X-gr2_lrg.jpg" width=25%>
+
 
 ### Configuration
 
