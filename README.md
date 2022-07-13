@@ -1,10 +1,20 @@
 # test-cz-induction
 
-Thermal simulation of Test-CZ Czochralski growth furnace with induction heating. A paper describing this model in detail has been submitted and is currently under review.
+Thermal simulation of Test-CZ Czochralski growth furnace with induction heating.
+
+The project is developed and maintained by the [**Model experiments group**](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description#c486) at the Leibniz Institute for Crystal Growth (IKZ).
+
+### Referencing
+If you use this code in your research, please cite our article (available with open access):
+
+> A. Enders-Seidlitz, J. Pal, and K. Dadzis, Development and validation of a thermal simulation for the Czochralski crystal growth process using model experiments *Journal of Crystal Growth*,  593 (2022) 126750. [https://doi.org/10.1016/j.jcrysgro.2022.126750](https://doi.org/10.1016/j.jcrysgro.2022.126750).
 
 ## Overview
 
 This project is used for 2D steady-state electromagnetism and heat transfer simulation of the NEMOCRYS Test-CZ Furnace.
+
+<img src="https://ars.els-cdn.com/content/image/1-s2.0-S002202482200238X-gr2_lrg.jpg" width=25%>
+
 
 ### Configuration
 
@@ -42,4 +52,4 @@ docker run -it --rm -v $PWD:/home/workdir -e LOCAL_UID=$(id -u $USER) -e LOCAL_G
 
 [This project](https://www.researchgate.net/project/NEMOCRYS-Next-Generation-Multiphysical-Models-for-Crystal-Growth-Processes) has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 851768).
 
-<img src="https://raw.githubusercontent.com/nemocrys/test-cz-induction/master/EU-ERC.png">
+<img src="https://github.com/nemocrys/test-cz-induction/blob/main/EU-ERC.png">
