@@ -1,10 +1,5 @@
-"""
-Basic definition of the geometry.
-"""
-
-
 import yaml
-from pyelmer.gmsh import *
+from objectgmsh import *
 from opencgs import setup
 
 
@@ -20,6 +15,25 @@ def crucible(
     material="",
     name="crucible",
 ):
+    """Cylindrical crucible
+
+    Args:
+        model (Model): objectgmsh model
+        dim (int): dimension
+        h (float): height
+        r_in (float): inner radius
+        r_out (float): outer radius
+        t_bt (float): bottom thickness
+        char_l (float, optional): mesh size characteristic length.
+            Defaults to 0.
+        T_init (float, optional): initial temperature. Defaults to
+            273.15.
+        material (str, optional): material name. Defaults to "".
+        name (str, optional): name of the shape. Defaults to "crucible".
+
+    Returns:
+        Shape: objectgmsh shape
+    """
     crc = Shape(model, dim, name)
 
     crc.params.h = h
@@ -62,6 +76,36 @@ def melt(
     g=9.81,
     res=100,
 ):
+    """Melt in cylindrical crucible, with meniscus
+
+    Args:
+        model (Model): objectgmsh model
+        dim (int): dimension
+        crucible (Shape): objectgmsh shape object
+        h (float): melt height in crucible
+        char_l (float, optional): mesh size characteristic length.
+            Defaults to 0.
+        T_init (float, optional): initial temperature. Defaults to
+            273.15.
+        material (str, optional): melt material name. Defaults to "".
+        name (str, optional): name of the shape. Defaults to "melt".
+        crystal_radius (float, optional): radius of crystal. Defaults to
+            0.
+        phase_if (Shape, optional): phase boundary. Defaults to None.
+        rho (float, optional): density of the melt (for meniscus
+            computation). Defaults to 0.
+        gamma (float, optional): surface tension of the melt (for
+            meniscus computation). Defaults to 0.
+        beta (float, optional): contact angle at crystal (for meniscus
+            computation). Defaults to 0.
+        g (float, optional): gravitational acceleration (for meniscus
+            computation). Defaults to 9.81.
+        res (int, optional): number of points in meniscus computation.
+            Defaults to 100.
+
+    Returns:
+        Shape: objectgmsh shape
+    """
     melt = Shape(model, dim, name)
     melt.params.h = h
     melt.params.T_init = T_init
@@ -179,23 +223,30 @@ def crystal(
     phase_if=None,
     name="crystal",
 ):
-    """[summary]
+    """Cylindrical / conical crystal.
 
     Args:
-        model ([type]): [description]
-        dim ([type]): [description]
-        r ([type]): [description]
-        l ([type]): [description]
-        char_l (int, optional): [description]. Defaults to 0.
-        T_init (float, optional): [description]. Defaults to 273.15.
-        X0 (list, optional): [description]. Defaults to [0, 0].
-        material (str, optional): [description]. Defaults to "".
-        melt ([type], optional): [description]. Defaults to None.
-        phase_if ([type], optional): [description]. Defaults to None.
-        name (str, optional): [description]. Defaults to "crystal".
+        model (Model): objectgmsh model
+        dim (int): dimension
+        r (float): crystal radius
+        l (float): crystal length
+        r_top (float, optional): top radius of conical crystal. Defaults
+            to -1 -> cylindrical crystal shape
+        char_l (float, optional): mesh size characteristic length.
+            Defaults to 0.
+        T_init (float, optional): initial temperature. Defaults to
+            273.15.
+        X0 (list, optional): origin of crystal (bottom of symmetry
+            axis), if not in contact with melt. Defaults to [0, 0].
+        material (str, optional): material name. Defaults to "".
+        melt (Shape, optional): melt object, if the crystal is in
+            contact with melt. Defaults to None.
+        phase_if (shape, optional): phase boundary shape. Defaults to
+            None.
+        name (str, optional): name of the shape. Defaults to "crystal".
 
     Returns:
-        [type]: [description]
+        Shape: objectgmsh shape
     """
     crys = Shape(model, dim, name)
     crys.params.r = r
@@ -252,6 +303,24 @@ def inductor(
     material="",
     name="inductor",
 ):
+    """2D inductor, defined as a couple of circles
+
+    Args:
+        model (Model): objectgmsh model
+        dim (int): dimension
+        d (float): diameter of windings
+        d_in (flaot): inner diameter of windings (internal cooling)
+        X0 (float): origin, center of bottom winding
+        g (float, optional): gap between windings. Defaults to 0.
+        n (int, optional): number of windings. Defaults to 1.
+        char_l (int, optional): mesh size characteristic length. Defaults to 0.
+        T_init (float, optional): initial temperature. Defaults to 273.15.
+        material (str, optional): material name. Defaults to "".
+        name (str, optional): shape name. Defaults to "inductor".
+
+    Returns:
+        Shape: objectgmsh shape
+    """
     # X0: center of bottom winding
     ind = Shape(model, dim, name)
     ind.params.d = d

@@ -6,7 +6,6 @@ general:
   heat_convection: True
   heating_induction: True
   phase_change: True
-  transient: False  # will be set by Simulation object
   v_pull: 4  # mm/min
 
 boundaries:
@@ -23,13 +22,6 @@ boundaries:
     T: 293.15
   vessel_outside:
     T: 293.15
-
-transient:
-  # smart_heater_t: 1  # optional, defaults to dt
-  # the following will be set by control in transient simulation
-  dt: 0.1
-  dt_out: 1
-  t_max: 100
 
 heating_induction:
   frequency: 13.5e+3  # Hz

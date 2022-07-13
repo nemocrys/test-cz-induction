@@ -8,7 +8,7 @@ import sys
 import yaml
 
 import pyelmer.elmer as elmer
-from pyelmer.gmsh import (
+from objectgmsh import (
     Model,
     Shape,
     MeshControlConstant,
@@ -19,7 +19,7 @@ from pyelmer.gmsh import (
 import opencgs.control as ctrl
 from opencgs.setup import ElmerSetupCz
 import czochralski as cz
-from opencgs.geo.general import line_from_points
+from opencgs.geo import line_from_points
 
 
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -211,7 +211,6 @@ def simulation(model, config, sim_dir="./simdata/_test", mat_config={}):
         probes=config["probes"],
         heating=config["heating_induction"],
         smart_heater=config["smart-heater"],
-        transient_setup=config["transient"],
         materials_dict=mat_config
     )
     if "solver-update" in config:
@@ -232,7 +231,7 @@ def simulation(model, config, sim_dir="./simdata/_test", mat_config={}):
     sim.add_body(model["filling"], force=joule_heat)
 
     # phase interface
-    sim.add_phase_interface(model["if_melt_crystal"], model["crystal"])
+    sim.add_phase_interface(model["if_melt_crystal"])
 
     # boundaries with convection (+ movement)
     sim.add_radiation_boundary(
@@ -242,20 +241,18 @@ def simulation(model, config, sim_dir="./simdata/_test", mat_config={}):
     sim.add_radiation_boundary(
         model["bnd_crystal_side"],
         **config["boundaries"]["crystal"],
-        movement=sim.distortion,
     )
     sim.add_radiation_boundary(
         model["bnd_crystal_top"],
         **config["boundaries"]["crystal"],
-        movement=sim.movement,
     )
     # moving boundaries
-    sim.add_radiation_boundary(model["bnd_seed"], movement=sim.movement)
-    sim.add_radiation_boundary(model["bnd_axtop_bt"], movement=sim.movement)
-    sim.add_radiation_boundary(model["bnd_axtop_side"], movement=sim.distortion)
+    sim.add_radiation_boundary(model["bnd_seed"])
+    sim.add_radiation_boundary(model["bnd_axtop_bt"])
+    sim.add_radiation_boundary(model["bnd_axtop_side"])
     # moving interfaces
-    sim.add_interface(model["if_crystal_seed"], sim.movement)
-    sim.add_interface(model["if_seed_axtop"], sim.movement)
+    sim.add_interface(model["if_crystal_seed"])
+    sim.add_interface(model["if_seed_axtop"])
     # stationary boundaries
     for bnd in [
         "bnd_crucible_bt",
@@ -285,7 +282,7 @@ def simulation(model, config, sim_dir="./simdata/_test", mat_config={}):
     )
 
     # symmetry axis
-    sim.add_interface(model["bnd_symmetry_axis"], sim.distortion)
+    sim.add_interface(model["bnd_symmetry_axis"], movement=[0, None])
 
     # heat flux computation
     sim.heat_flux_computation(sim["crucible"], sim["bnd_crucible_outside"])
@@ -338,6 +335,4 @@ if __name__ == "__main__":
     geo_config = ctrl.load_config("./config_geo.yml")
     sim_config = ctrl.load_config("./config_sim.yml")
     model1 = geometry(geo_config, visualize=True)
-    model2 = geometry(geo_config, visualize=True)
-
     # simulation(model, sim_config)
