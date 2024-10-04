@@ -1,5 +1,7 @@
 # test-cz-induction
 
+[![DOI](https://zenodo.org/badge/448813510.svg)](https://doi.org/10.5281/zenodo.13890483)
+
 Thermal simulation of Test-CZ Czochralski growth furnace with induction heating.
 
 The project is developed and maintained by the [**Model experiments group**](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description#c486) at the Leibniz Institute for Crystal Growth (IKZ).
